@@ -153,18 +153,26 @@ app.get('/getposts', (req, res) => {
         database: 'DPON151_ME',
         trustServerCertificate: true
        }
+
+       // var to store file name 
+       var d = new Date();
+         var fileName = "db_"+d.getDate()+"_"+d.getMonth()+"_"+d.getTime();
        sql.connect(config, function(err, data) {
+        
          if(err) console.log(err);
            let sqlRequest = new sql.Request();
 
-           let sqlQuery = "select * from dbo.cust where name like 'aa%' AND surname like '_a____%';";
+           let sqlQuery = "select * from dbo.cust where name like 'aa%' AND surname like 'a%' AND branch='bsmtr';";
            sqlRequest.query(sqlQuery, function (err, data) {
              if(err) console.log(err) 
              console.log(data);
-             fs.writeFile('op.json', JSON.stringify(data), err => err && console.log(err));
+         
+             fs.writeFile(`json_files/${fileName}.json`, JSON.stringify(data.recordset), err => err && console.log(err));
              sql.close();
            });
        });
+      
+       res.send("The JSON file is downloaded please find it in the Json directory by the name "+fileName+".JSON");
     });
 
 
