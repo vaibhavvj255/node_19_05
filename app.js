@@ -5,144 +5,20 @@ const fs = require('fs');
 const app = express();
 const bodyParser = require("body-parser");
 const path = require('path');
+const { json } = require('express');
 
 app.use(bodyParser.urlencoded({extended: false}));
 
 
 
-//---------------------==
+//-------get app------
 
 app.get('/', function(req,res) {
   res.sendFile(path.join(__dirname + '/index.html'));
 });
 
-
-
-/*
-var mysqlConnection = mysql.createConnection({
-host : 'localhost',
-user : 'root',
-password: '',
-database: 'nodemysql'
-});
-
-//connect 
-
-mysqlConnection.connect((err)=>  {
-  if(err){
-    throw err;
-  }
-console.log("Mysql Connect..");
-});
-
-
-*/
-
-
-/*
-var Connection = require('tedious').Connection;  
-var config = {  
-    server: 'OPPACU-HOST',  //update me
-    authentication: {
-        type: 'default',
-        options: {
-            userName: 'Vaibhav', //update me
-            password: 'Lvk77351',  //update me
-           
-        }
-    },
-    options: {
-        // If you are on Microsoft Azure, you need encryption:
-        database: 'DPON151_ME',  //update me
-        trustServerCertificate: true
-    }
-}; 
-var connection = new Connection(config);  
-connection.on('connect', function(err) {  
-    // If no error, then good to proceed.  
-    console.log("Connected");  
-    executeStatement();
-     
-});  
-// connection to sql 
-connection.connect();
-
-
-// request data from databasse 
-var Request = require('tedious').Request;  
-var TYPES = require('tedious').TYPES;  
-
-function executeStatement() {  
-    request = new Request("select * from dbo.cust where name like 'a_s%';", function(err) {  
-    if (err) {  
-        console.log(err);}  
-    });  
-    var result = "";  
-    request.on('row', function(columns) {  
-        columns.forEach(function(column) {  
-          if (column.value === null) {  
-            console.log('NULL');  
-          } else {  
-            result+= column.value;  
-          }  
-        });  
-    
-        console.log(result); 
-        result =""; 
-     
-    });  
-    
-    request.on('done', function(rowCount, more) {  
-    console.log(rowCount + ' rows returned');  
-    });  
-    connection.execSql(request);  
-    
-}  
-//fs.writeFile('winin.json', JSON.stringify(result), err => err && console.log(err));
-// starting the app
-
-
-
-
-
-  // mysqlConnection.query('Select * from db.cust',(err,rows,fields)=>{
-  //   if(!err) { console.log(rows);
-  //   res.send(rows);
-  //   fs.writeFile('today.json', JSON.stringify(rows), err => err && console.log(err));
-  // }
-  //   else 
-  //   console.log(err);
-   
-  // });
-
-
-
-
-
-
-
-// Select posts
-/*
-app.get('/getposts', (req, res) => {
-  mysqlConnection.query('Select * from db.cust',(err,rows,fields)=>{
-    if(!err) { console.log(rows);
-    res.send(rows);
-    fs.writeFile('today.json', JSON.stringify(rows), err => err && console.log(err));
-  }
-    else 
-    console.log(err);
-   
-  });
-});
-
-*/
-
-
-
-
-
-
-    app.post("/Employees",function (req, res)  {
+//----- post app-------
+app.post("/Employees",function (req, res)  {
        const sql = require("mssql");
 
        const config = {
@@ -154,24 +30,63 @@ app.get('/getposts', (req, res) => {
         trustServerCertificate: true
        }
 
+         
+
        // var to store file name 
        var d = new Date();
-         var fileName = "db_"+d.getDate()+"_"+d.getMonth()+"_"+d.getTime();
-       sql.connect(config, function(err, data) {
-        
-         if(err) console.log(err);
-           let sqlRequest = new sql.Request();
-
-           let sqlQuery = "select * from dbo.cust where name like 'aa%' AND surname like 'a%' AND branch='bsmtr';";
-           sqlRequest.query(sqlQuery, function (err, data) {
-             if(err) console.log(err) 
-             console.log(data);
-         
-             fs.writeFile(`json_files/${fileName}.json`, JSON.stringify(data.recordset), err => err && console.log(err));
-             sql.close();
-           });
-       });
+      var fileName = "db_"+d.getDate()+"_"+d.getMonth()+"_"+d.getTime();
       
+      //--------------------- async method----------------------
+
+      (async function () {
+        try {
+            let pool = await sql.connect(config)
+           
+
+//---------SQL Queries Here ----------------
+           let  data = await pool.request().query("select name as 'A10', rowno  from cust where rowno=593075214;");
+           let  data2 = await pool.request().query("select surname  from cust where rowno=593075214;");
+           let  data3 = await pool.request().query("select benefit  from cust where rowno=593075214;");
+
+//-------- Converting query data to JSON stringify strings----------
+           var first_row =  JSON.stringify(data.recordset).replace(/]|[[]|[}]/g, '');
+           var last_row =  JSON.stringify(data2.recordset).replace(/]|[[]|[]|[{]/g, '');
+           var A01 = JSON.stringify(data3.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+
+//-------- Assigning the data strings to finalString to add in the Object------------
+           var finalString = first_row;
+           finalString += ","+A01;
+           finalString +=","+last_row;
+
+//-------- Creating the object to store string sql data in the json format-------------- 
+          var mainObject = new Object();
+          //parsing the finalString to add it in the mainObject
+          mainObject = JSON.parse(finalString);
+          //Converting the object to JSONp format, storing in the var jsonData
+          var jsonData = JSON.stringify(mainObject);
+
+
+          //Console log the final results 
+           console.log("Final String:"+finalString);
+           console.log(mainObject);
+           console.log("Stringify Wallah:"+jsonData);
+
+//---------Creating the JSON file and exporting to the folder named json_files-----
+        fs.writeFile(`json_files/${fileName}.json`, jsonData, err => err && console.log(err));
+        
+        //catching the errors
+      } catch (err) {
+           console.log(err);
+        }
+    })()
+
+
+    
+    sql.on('error', err => {
+        console.log(err);
+    })
+
+
        res.send("The JSON file is downloaded please find it in the Json directory by the name "+fileName+".JSON");
     });
 
