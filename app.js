@@ -48,7 +48,7 @@ app.post("/Employees",function (req, res)  {
            let  firstRow = await pool.request().query("select name as 'First_row'  from cust where rowno=593075214;");
           
            // more queries goes here 
-           let  DL01q = await pool.request().query("SELECT COUNT(loan.approved) AS 'DL01', SUM(loan.balance) AS 'DL10' FROM cust INNER JOIN loan ON cust.rowno = loan.rowno_custloan_cust WHERE  (loan.beacon IS NULL OR loan.beacon = 0)  AND loan.status = 'active' AND (loan.type = 'loan' OR loan.type = 'rrl' OR loan.type = 'rtl');");
+           let  DL01q = await pool.request().query("SELECT COUNT(loan.approved) AS 'DL01', SUM(loan.balance)*-1 AS 'DL10' FROM cust INNER JOIN loan ON cust.rowno = loan.rowno_custloan_cust WHERE  (loan.beacon IS NULL OR loan.beacon = 0)  AND loan.status = 'active' AND (loan.type = 'loan' OR loan.type = 'rrl' OR loan.type = 'rtl');");
 
            let  DL02q = await pool.request().query("SELECT COUNT(loan.approved) AS 'DL02', SUM(loan.balance)*-1 AS 'DL11' FROM cust INNER JOIN loan ON cust.rowno = loan.rowno_custloan_cust WHERE  (loan.beacon > 0 AND loan.beacon < 500)  AND loan.status = 'active' AND (loan.type = 'loan' OR loan.type = 'rrl' OR loan.type = 'rtl');");
 
@@ -108,6 +108,76 @@ app.post("/Employees",function (req, res)  {
 
            let  RM65q = await pool.request().query("SELECT COUNT(loan.approved) AS 'RM65', SUM(loan.balance)*-1 AS 'RM74' FROM cust INNER JOIN loan ON cust.rowno = loan.rowno_custloan_cust WHERE  loan.status = 'active' AND (loan.type = 'varmtge' OR loan.type = 'mortgage' OR loan.type = 'commerci');");
 
+           let  RM87q = await pool.request().query("SELECT  COUNT(loan.tds) as 'RM87', SUM(loan.balance)*-1 as 'RM97' FROM loan INNER JOIN cust ON loan.rowno_custloan_cust = cust.rowno WHERE loan.status = 'active' AND (loan.type = 'mortgage' OR loan.type ='mrl' OR loan.type = 'prl' OR loan.type = 'varmtge') AND loan.tds = 0;");
+
+           let  RM88q = await pool.request().query("SELECT  COUNT(loan.tds) as 'RM88', SUM(loan.balance)*-1 as 'RM998' FROM loan INNER JOIN cust ON loan.rowno_custloan_cust = cust.rowno WHERE loan.status = 'active' AND (loan.type = 'mortgage' OR loan.type ='mrl' OR loan.type = 'prl' OR loan.type = 'varmtge') AND loan.tds > 0 AND loan.tds <= 30;");
+
+           let  RM89q = await pool.request().query("SELECT  COUNT(loan.tds) as 'RM89', SUM(loan.balance)*-1 as 'RM99' FROM loan INNER JOIN cust ON loan.rowno_custloan_cust = cust.rowno WHERE loan.status = 'active' AND (loan.type = 'mortgage' OR loan.type ='mrl' OR loan.type = 'prl' OR loan.type = 'varmtge') AND loan.tds > 30 AND loan.tds <= 35;");
+
+           let  RM90q = await pool.request().query("SELECT  COUNT(loan.tds) as 'RM90', SUM(loan.balance)*-1 as 'RM100' FROM loan INNER JOIN cust ON loan.rowno_custloan_cust = cust.rowno WHERE loan.status = 'active' AND (loan.type = 'mortgage' OR loan.type ='mrl' OR loan.type = 'prl' OR loan.type = 'varmtge') AND loan.tds > 35 AND loan.tds <= 40;");
+
+           let  RM91q = await pool.request().query("SELECT  COUNT(loan.tds) as 'RM91', SUM(loan.balance)*-1 as 'RM101' FROM loan INNER JOIN cust ON loan.rowno_custloan_cust = cust.rowno WHERE loan.status = 'active' AND (loan.type = 'mortgage' OR loan.type ='mrl' OR loan.type = 'prl' OR loan.type = 'varmtge') AND loan.tds > 40 AND loan.tds <= 45;");
+
+           let  RM92q = await pool.request().query("SELECT  COUNT(loan.tds) as 'RM92', SUM(loan.balance)*-1 as 'RM102' FROM loan INNER JOIN cust ON loan.rowno_custloan_cust = cust.rowno WHERE loan.status = 'active' AND (loan.type = 'mortgage' OR loan.type ='mrl' OR loan.type = 'prl' OR loan.type = 'varmtge') AND loan.tds > 45 AND loan.tds <= 50;");
+
+           let  RM93q = await pool.request().query("SELECT  COUNT(loan.tds) as 'RM93', SUM(loan.balance)*-1 as 'RM103' FROM loan INNER JOIN cust ON loan.rowno_custloan_cust = cust.rowno WHERE loan.status = 'active' AND (loan.type = 'mortgage' OR loan.type ='mrl' OR loan.type = 'prl' OR loan.type = 'varmtge') AND loan.tds > 50 AND loan.tds <= 55;");
+
+           let  RM94q = await pool.request().query("SELECT  COUNT(loan.tds) as 'RM94', SUM(loan.balance)*-1 as 'RM104' FROM loan INNER JOIN cust ON loan.rowno_custloan_cust = cust.rowno WHERE loan.status = 'active' AND (loan.type = 'mortgage' OR loan.type ='mrl' OR loan.type = 'prl' OR loan.type = 'varmtge') AND loan.tds > 55 AND loan.tds <= 60;");
+
+           let  RM95q = await pool.request().query("SELECT  COUNT(loan.tds) as 'RM95', SUM(loan.balance)*-1 as 'RM105' FROM loan INNER JOIN cust ON loan.rowno_custloan_cust = cust.rowno WHERE loan.status = 'active' AND (loan.type = 'mortgage' OR loan.type ='mrl' OR loan.type = 'prl' OR loan.type = 'varmtge') AND loan.tds > 60;");
+
+           let  RM96q = await pool.request().query("SELECT  COUNT(loan.tds) as 'RM96', SUM(loan.balance)*-1 as 'RM106' FROM loan INNER JOIN cust ON loan.rowno_custloan_cust = cust.rowno WHERE loan.status = 'active' AND (loan.type = 'mortgage' OR loan.type ='mrl' OR loan.type = 'prl' OR loan.type = 'varmtge');");
+
+           let  RM15q = await pool.request().query("SELECT COUNT(ltv) as 'RM15' from loan INNER JOIN cust ON loan.rowno_custloan_cust = cust.rowno WHERE loan.status = 'active' AND (loan.type = 'mortgage' OR loan.type ='mrl' OR loan.type = 'prl' OR loan.type = 'varmtge') and loan.ltv > 0 AND  loan.ltv <=40;");
+
+           let  RM16q = await pool.request().query("SELECT COUNT(ltv) as 'RM16' from loan INNER JOIN cust ON loan.rowno_custloan_cust = cust.rowno WHERE loan.status = 'active' AND (loan.type = 'mortgage' OR loan.type ='mrl' OR loan.type = 'prl' OR loan.type = 'varmtge') and loan.ltv > 40 AND  loan.ltv <=60;");
+
+           let  RM17q = await pool.request().query("SELECT COUNT(ltv) as 'RM17' from loan INNER JOIN cust ON loan.rowno_custloan_cust = cust.rowno WHERE loan.status = 'active' AND (loan.type = 'mortgage' OR loan.type ='mrl' OR loan.type = 'prl' OR loan.type = 'varmtge') and loan.ltv > 60 AND  loan.ltv <=70;");
+
+           let  RM18q = await pool.request().query("SELECT COUNT(ltv) as 'RM18' from loan INNER JOIN cust ON loan.rowno_custloan_cust = cust.rowno WHERE loan.status = 'active' AND (loan.type = 'mortgage' OR loan.type ='mrl' OR loan.type = 'prl' OR loan.type = 'varmtge') and loan.ltv > 70 AND  loan.ltv <=80;");
+
+           let  RM19q = await pool.request().query("SELECT COUNT(ltv) as 'RM19' from loan INNER JOIN cust ON loan.rowno_custloan_cust = cust.rowno WHERE loan.status = 'active' AND (loan.type = 'mortgage' OR loan.type ='mrl' OR loan.type = 'prl' OR loan.type = 'varmtge') and loan.ltv > 80 AND  loan.ltv <=90;");
+
+           let  RM20q = await pool.request().query("SELECT COUNT(ltv) as 'RM20' from loan INNER JOIN cust ON loan.rowno_custloan_cust = cust.rowno WHERE loan.status = 'active' AND (loan.type = 'mortgage' OR loan.type ='mrl' OR loan.type = 'prl' OR loan.type = 'varmtge') and loan.ltv >90 AND  loan.ltv <=95;");
+
+           let  RM21q = await pool.request().query("SELECT COUNT(ltv) as 'RM21' from loan INNER JOIN cust ON loan.rowno_custloan_cust = cust.rowno WHERE loan.status = 'active' AND (loan.type = 'mortgage' OR loan.type ='mrl' OR loan.type = 'prl' OR loan.type = 'varmtge') and loan.ltv > 95;");
+
+           let  RM22q = await pool.request().query("SELECT COUNT(ltv) as 'RM22' from loan INNER JOIN cust  ON loan.rowno_custloan_cust = cust.rowno WHERE loan.status = 'active' AND (loan.type = 'mortgage' OR loan.type ='mrl' OR loan.type = 'prl' OR loan.type = 'varmtge');");
+
+           let  RM23q = await pool.request().query("SELECT SUM(loan.balance)*-1 as 'RM23' from loan INNER JOIN cust  ON loan.rowno_custloan_cust = cust.rowno WHERE loan.status = 'active' AND (loan.type = 'mortgage' OR loan.type ='mrl' OR loan.type = 'prl' OR loan.type = 'varmtge') AND loan.class IN (8,16,80) and loan.ltv > 0 AND  loan.ltv <=40;");
+
+           let  RM24q = await pool.request().query("SELECT SUM(loan.balance)*-1 as 'RM24' from loan INNER JOIN cust  ON loan.rowno_custloan_cust = cust.rowno WHERE loan.status = 'active' AND (loan.type = 'mortgage' OR loan.type ='mrl' OR loan.type = 'prl' OR loan.type = 'varmtge') AND loan.class IN (8,16,80) and loan.ltv > 40 AND  loan.ltv <=60;");
+
+           let  RM25q = await pool.request().query("SELECT SUM(loan.balance)*-1 as 'RM25' from loan INNER JOIN cust  ON loan.rowno_custloan_cust = cust.rowno WHERE loan.status = 'active' AND (loan.type = 'mortgage' OR loan.type ='mrl' OR loan.type = 'prl' OR loan.type = 'varmtge') AND loan.class IN (8,16,80) and loan.ltv > 60 AND  loan.ltv <=70;");
+
+           let  RM26q = await pool.request().query("SELECT SUM(loan.balance)*-1 as 'RM26' from loan INNER JOIN cust  ON loan.rowno_custloan_cust = cust.rowno WHERE loan.status = 'active' AND (loan.type = 'mortgage' OR loan.type ='mrl' OR loan.type = 'prl' OR loan.type = 'varmtge') AND loan.class IN (8,16,80) and loan.ltv > 70 AND  loan.ltv <=80;");
+
+           let  RM27q = await pool.request().query("SELECT SUM(loan.balance)*-1 as 'RM27' from loan INNER JOIN cust  ON loan.rowno_custloan_cust = cust.rowno WHERE loan.status = 'active' AND (loan.type = 'mortgage' OR loan.type ='mrl' OR loan.type = 'prl' OR loan.type = 'varmtge') AND loan.class IN (8,16,80) and loan.ltv > 80 AND  loan.ltv <=90;");
+
+           let  RM28q = await pool.request().query("SELECT SUM(loan.balance)*-1 as 'RM28' from loan INNER JOIN cust  ON loan.rowno_custloan_cust = cust.rowno WHERE loan.status = 'active' AND (loan.type = 'mortgage' OR loan.type ='mrl' OR loan.type = 'prl' OR loan.type = 'varmtge') AND loan.class IN (8,16,80) and loan.ltv >90 AND  loan.ltv <=95;");
+
+           let  RM29q = await pool.request().query("SELECT SUM(loan.balance)*-1 as 'RM29' from loan INNER JOIN cust  ON loan.rowno_custloan_cust = cust.rowno WHERE loan.status = 'active' AND (loan.type = 'mortgage' OR loan.type ='mrl' OR loan.type = 'prl' OR loan.type = 'varmtge') AND loan.class IN (8,16,80) and loan.ltv > 95;");
+
+           let  RM30q = await pool.request().query("SELECT SUM(loan.balance)*-1 as 'RM30' from loan INNER JOIN cust  ON loan.rowno_custloan_cust = cust.rowno WHERE loan.status = 'active' AND (loan.type = 'mortgage' OR loan.type ='mrl' OR loan.type = 'prl' OR loan.type = 'varmtge') AND loan.class IN (8,16,80); ");
+
+           let  RM31q = await pool.request().query("SELECT SUM(loan.balance)*-1 as 'RM31' from loan INNER JOIN cust  ON loan.rowno_custloan_cust = cust.rowno WHERE loan.status = 'active' AND (loan.type = 'mortgage' OR loan.type ='mrl' OR loan.type = 'prl' OR loan.type = 'varmtge') AND loan.class NOT IN (8,16,80) and loan.ltv > 0 AND  loan.ltv <=40; ");
+
+           let  RM32q = await pool.request().query("SELECT SUM(loan.balance)*-1 as 'RM32' from loan INNER JOIN cust  ON loan.rowno_custloan_cust = cust.rowno WHERE loan.status = 'active' AND (loan.type = 'mortgage' OR loan.type ='mrl' OR loan.type = 'prl' OR loan.type = 'varmtge') AND loan.class NOT IN (8,16,80) and loan.ltv > 40 AND  loan.ltv <=60;");
+
+           let  RM33q = await pool.request().query("SELECT SUM(loan.balance)*-1 as 'RM33' from loan INNER JOIN cust  ON loan.rowno_custloan_cust = cust.rowno WHERE loan.status = 'active' AND (loan.type = 'mortgage' OR loan.type ='mrl' OR loan.type = 'prl' OR loan.type = 'varmtge') AND loan.class NOT IN (8,16,80) and loan.ltv > 60 AND  loan.ltv <=70;");
+
+           let  RM34q = await pool.request().query("SELECT SUM(loan.balance)*-1 as 'RM34' from loan INNER JOIN cust  ON loan.rowno_custloan_cust = cust.rowno WHERE loan.status = 'active' AND (loan.type = 'mortgage' OR loan.type ='mrl' OR loan.type = 'prl' OR loan.type = 'varmtge') AND loan.class NOT IN (8,16,80) and loan.ltv > 70 AND  loan.ltv <=80;");
+
+           let  RM35q = await pool.request().query("SELECT SUM(loan.balance)*-1 as 'RM35' from loan INNER JOIN cust  ON loan.rowno_custloan_cust = cust.rowno WHERE loan.status = 'active' AND (loan.type = 'mortgage' OR loan.type ='mrl' OR loan.type = 'prl' OR loan.type = 'varmtge') AND loan.class NOT IN (8,16,80) and loan.ltv > 80 AND  loan.ltv <=90;");
+
+           let  RM36q = await pool.request().query("SELECT SUM(loan.balance)*-1 as 'RM36' from loan INNER JOIN cust  ON loan.rowno_custloan_cust = cust.rowno WHERE loan.status = 'active' AND (loan.type = 'mortgage' OR loan.type ='mrl' OR loan.type = 'prl' OR loan.type = 'varmtge') AND loan.class NOT IN (8,16,80) and loan.ltv >90 AND  loan.ltv <=95;");
+
+           let  RM37q = await pool.request().query("SELECT SUM(loan.balance)*-1 as 'RM37' from loan INNER JOIN cust  ON loan.rowno_custloan_cust = cust.rowno WHERE loan.status = 'active' AND (loan.type = 'mortgage' OR loan.type ='mrl' OR loan.type = 'prl' OR loan.type = 'varmtge') AND loan.class NOT IN (8,16,80) and loan.ltv > 95; ");
+
+           let  RM38q = await pool.request().query("SELECT SUM(loan.balance)*-1 as 'RM38' from loan INNER JOIN cust  ON loan.rowno_custloan_cust = cust.rowno WHERE loan.status = 'active' AND (loan.type = 'mortgage' OR loan.type ='mrl' OR loan.type = 'prl' OR loan.type = 'varmtge') AND loan.class NOT IN (8,16,80);");
+           
+
+
 
            // lastRow not removed 
            let  lastRow = await pool.request().query("select benefit AS 'Lastrow'  from cust where rowno=593075214;");
@@ -147,6 +217,41 @@ app.post("/Employees",function (req, res)  {
           var RM63 = JSON.stringify(RM63q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
           var RM64 = JSON.stringify(RM64q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
           var RM65 = JSON.stringify(RM65q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var RM87 = JSON.stringify(RM87q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var RM88 = JSON.stringify(RM88q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var RM89 = JSON.stringify(RM89q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var RM90 = JSON.stringify(RM90q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var RM91 = JSON.stringify(RM91q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var RM92 = JSON.stringify(RM92q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var RM93 = JSON.stringify(RM93q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var RM94 = JSON.stringify(RM94q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var RM95 = JSON.stringify(RM95q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var RM96 = JSON.stringify(RM96q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var RM15 = JSON.stringify(RM15q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var RM16 = JSON.stringify(RM16q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var RM17 = JSON.stringify(RM17q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var RM18 = JSON.stringify(RM18q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var RM19 = JSON.stringify(RM19q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var RM20 = JSON.stringify(RM20q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var RM21 = JSON.stringify(RM21q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var RM22 = JSON.stringify(RM22q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var RM23 = JSON.stringify(RM23q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var RM24 = JSON.stringify(RM24q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var RM25 = JSON.stringify(RM25q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var RM26 = JSON.stringify(RM26q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var RM27 = JSON.stringify(RM27q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var RM28 = JSON.stringify(RM28q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var RM29 = JSON.stringify(RM29q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var RM30 = JSON.stringify(RM30q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var RM31 = JSON.stringify(RM31q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var RM32 = JSON.stringify(RM32q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var RM33 = JSON.stringify(RM33q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var RM34 = JSON.stringify(RM34q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var RM35 = JSON.stringify(RM35q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var RM36 = JSON.stringify(RM36q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var RM37 = JSON.stringify(RM37q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var RM38 = JSON.stringify(RM38q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          
           
       
            // last row never removed 
@@ -154,11 +259,12 @@ app.post("/Employees",function (req, res)  {
            
 
 //-------- Assigning the data strings to finalString to add in the Object------------
+
            // initialising finalString
            var finalString = first_row;
 
            // more field goes here
-           finalString +=","+DL01+","+DL02+","+DL03+","+DL04+","+DL05+","+DL06+","+DL07+","+DL08+","+DL09+","+DL31+","+DL32+","+DL33+","+DL34+","+DL35+","+DL36+","+DL37+","+DL38+","+DL39+","+E024+","+E025+","+E026+","+RM57+","+RM58+","+RM59+","+RM60+","+RM61+","+RM62+","+RM63+","+RM64+","+RM65;
+           finalString +=","+DL01+","+DL02+","+DL03+","+DL04+","+DL05+","+DL06+","+DL07+","+DL08+","+DL09+","+DL31+","+DL32+","+DL33+","+DL34+","+DL35+","+DL36+","+DL37+","+DL38+","+DL39+","+E024+","+E025+","+E026+","+RM57+","+RM58+","+RM59+","+RM60+","+RM61+","+RM62+","+RM63+","+RM64+","+RM65+","+RM87+","+RM88+","+RM89+","+RM90+","+RM91+","+RM92+","+RM93+","+RM94+","+RM95+","+RM96+","+RM15+","+RM16+","+RM17+","+RM18+","+RM19+","+RM20+","+RM21+","+RM22+","+RM23+","+RM24+","+RM25+","+RM26+","+RM27+","+RM28+","+RM29+","+RM30+","+RM31+","+RM32+","+RM33+","+RM34+","+RM35+","+RM36+","+RM37+","+RM38;
            
 
 
@@ -170,7 +276,7 @@ app.post("/Employees",function (req, res)  {
           var mainObject = new Object();
           //parsing the finalString to add it in the mainObject
           mainObject = JSON.parse(finalString);
-          //Converting the object to JSONp format, storing in the var jsonData
+          //Converting the object to JSON format, storing in the var jsonData
           var jsonData = JSON.stringify(mainObject);
 
 
