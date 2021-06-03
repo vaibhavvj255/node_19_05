@@ -34,6 +34,12 @@ app.post("/Employees",function (req, res)  {
 
        // var to store file name 
        var d = new Date();
+       var dd = d.getDate();
+       var mm = d.getMonth();
+       var yy = d.getFullYear();
+       var monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
       var fileName = "db_"+d.getDate()+"_"+d.getMonth()+"_"+d.getTime();
       
       //--------------------- async method----------------------
@@ -177,7 +183,127 @@ app.post("/Employees",function (req, res)  {
            let  RM38q = await pool.request().query("SELECT SUM(loan.balance)*-1 as 'RM38' from loan INNER JOIN cust  ON loan.rowno_custloan_cust = cust.rowno WHERE loan.status = 'active' AND (loan.type = 'mortgage' OR loan.type ='mrl' OR loan.type = 'prl' OR loan.type = 'varmtge') AND loan.class NOT IN (8,16,80);");
            
 
+           let  A01q = await pool.request().query("SELECT SUM(gl.balance)*-1 as 'A01' from gl WHERE no_  in (1080201,1080600,10806001,1080800,1080900,1081000,1081050,1081055) AND branch = 'oppa';");
 
+           let  A02q = await pool.request().query("SELECT SUM(gl.balance)*-1 as 'A02' from gl WHERE no_  in (1080201,1080600,10806001,1080800,1080900,1081000,1081050,1081055) AND branch = 'oppa';");
+
+           let  A03q = await pool.request().query("SELECT SUM(gl.balance)*-1 as 'A03' from gl WHERE no_  in (1080300,1080400,2302600) AND branch = 'oppa';");
+
+           let  A04q = await pool.request().query("SELECT SUM(gl.balance)*-1 as 'A04' from gl WHERE no_  in (1080300,1080400,2302600) AND branch = 'oppa';");
+
+           let  A10q = await pool.request().query("SELECT SUM(gl.balance)*-1 as 'A10' from gl WHERE no_  in (1150300,1150302,1150303) AND branch = 'oppa';");
+
+           let  A11q = await pool.request().query("SELECT SUM(gl.balance)*-1 as 'A11' from gl WHERE no_  in (1150300,1150302,1150303) AND branch = 'oppa';");
+
+           let  A12q = await pool.request().query("SELECT SUM(gl.balance)*-1 as 'A12' from gl WHERE no_  in (1150300,1150302,1150303) AND branch = 'oppa';");
+
+           let  A13q = await pool.request().query("SELECT SUM(gl.balance)*-1 as 'A12' from gl WHERE no_  in (1150300,1150302,1150303) AND branch = 'oppa';");
+
+           let  A16q = await pool.request().query("SELECT SUM(gl.balance)*-1 as 'A16' from gl WHERE no_  =  1150400 AND branch = 'oppa';");
+
+           let  A26q = await pool.request().query("SELECT SUM(gl.balance)*-1 as 'A26' from gl WHERE no_  in (1150502,1150503) AND branch = 'oppa';");
+
+           let  A83q = await pool.request().query("SELECT sum(gl.balance) as 'A83' from gl WHERE no_  in (1870000,1870001,1870002,1870101,1870103,1870104,1870105,1870106,1870107,1870201,1870203,1870204,1870205,1870207) AND branch = 'oppa';");
+
+           let  A84q = await pool.request().query("SELECT sum(gl.balance)*-1 as 'A84' from gl WHERE no_  in (1850100,1860101,1860301,1870206,1870205,1870211,1860201,1860401,1870210,1870212,1870101,1870000,1870201,1870204,1870205,1870207) AND branch = 'oppa';");
+
+           let  A91q = await pool.request().query("SELECT sum(gl.balance)*-1 as 'A91' from gl WHERE no_  in (1440305) AND branch = 'oppa';");
+
+           let  A93q = await pool.request().query("SELECT sum(gl.balance)*-1 as 'A93' from gl WHERE no_  in (1440305,1730100,1730200,1730400,1730500,1730600,1730700,1730800,1741300,1741400,1741500,1741600,1741700,1741800,1745000,1769900,1770100,1770107,1770300,1770400,1770500,1770600,1440401,1761400,1761500,1761600,1761700,1771600,1150304,1150305) AND branch = 'oppa';");
+
+           let  A09q = await pool.request().query("SELECT SUM(gl.balance)*-1 as 'A09' from gl WHERE no_  in (1080201,1080600,10806001,1080800,1080900,1081000,1081050,1081055,1080300,1080400,2302600) AND branch = 'oppa';");
+
+           let  T08q = await pool.request().query("SELECT sum(loan.balance)*-1 AS 'T08'  from cust INNER JOIN loan ON cust.rowno = loan.rowno_custloan_cust   where cust.no_ IN (123042, 135194, 137299,  137364, 137398, 139154, 141895,  155713,  156216, 171520, 171553,  172395,  187203,  207969, 209239, 209569, 209668, 209767, 209775, 210906, 213603, 214169,  217562,  221887,  222786,  229526, 232777, 233676,  235465,  236521, 239723, 26351, 26351, 41640, 41640, 50096, 66092, 68098, 70003, 77768, 82214, 86397, 88880, 94375, 96420, 96503, 97519, 988022);");
+
+           let  DL79q = await pool.request().query("SELECT count(loan.class) as 'DL79', sum(loan.balance)*-1 AS 'DL84'  from cust INNER JOIN loan ON cust.rowno = loan.rowno_custloan_cust WHERE loan.status = 'active' AND loan.class IN (8,16,80);");
+
+           let  DL80q = await pool.request().query("SELECT count(loan.class) as 'DL80', sum(loan.balance)*-1 AS 'DL85'  from cust INNER JOIN loan ON cust.rowno = loan.rowno_custloan_cust WHERE loan.status = 'active' AND cust.branch <> 'oppa';");
+
+           let  DL82q = await pool.request().query("SELECT count(loan.class) as 'DL82', sum(loan.balance)*-1 AS 'DL87'  from cust INNER JOIN loan ON cust.rowno = loan.rowno_custloan_cust WHERE loan.status = 'active' AND loan.class IN (12,21);");
+
+
+           let  RL01q = await pool.request().query("SELECT  sum(loan.balance)*-1 AS 'RL01'  from cust INNER JOIN loan ON cust.rowno = loan.rowno_custloan_cust WHERE   loan.class IN (1,14,23);");
+
+
+           let  RM01q = await pool.request().query("SELECT  COUNT(loan.balance) AS 'RM01', SUM(loan.balance)*-1 AS 'RM08' from cust INNER JOIN loan ON cust.rowno = loan.rowno_custloan_cust WHERE loan.status = 'active' AND loan.type IN ('MORTGAGE','VARMTGE') AND (loan.balance < 0 AND loan.balance >= -125000) ;");
+
+           let  RM02q = await pool.request().query("SELECT  COUNT(loan.balance) AS 'RM02', SUM(loan.balance)*-1 AS 'RM09' from cust INNER JOIN loan ON cust.rowno = loan.rowno_custloan_cust WHERE loan.status = 'active' AND loan.type IN ('MORTGAGE','VARMTGE') AND (loan.balance < -125000 AND loan.balance >= -250000) ;");
+           
+           let  RM03q = await pool.request().query("SELECT  COUNT(loan.balance) AS 'RM03', SUM(loan.balance)*-1 AS 'RM10' from cust INNER JOIN loan ON cust.rowno = loan.rowno_custloan_cust WHERE loan.status = 'active' AND loan.type IN ('MORTGAGE','VARMTGE') AND (loan.balance < -250000 AND loan.balance >= -500000) ;");
+
+           let  RM04q = await pool.request().query("SELECT  COUNT(loan.balance) AS 'RM04', SUM(loan.balance)*-1 AS 'RM11' from cust INNER JOIN loan ON cust.rowno = loan.rowno_custloan_cust WHERE loan.status = 'active' AND loan.type IN ('MORTGAGE','VARMTGE') AND (loan.balance < -500000 AND loan.balance >= -1000000) ;");
+
+           let  RM07q = await pool.request().query("SELECT  COUNT(loan.balance) AS 'RM07', SUM(loan.balance)*-1 AS 'RM14' from cust INNER JOIN loan ON cust.rowno = loan.rowno_custloan_cust WHERE loan.status = 'active' AND loan.type IN ('MORTGAGE','VARMTGE') ;");
+
+           let  A92q = await pool.request().query("SELECT sum(gl.balance)  as 'A92' from gl WHERE no_  in (1440305) ;");
+
+           let  E11q = await pool.request().query("SELECT sum(gl.balance)  as 'E11' from gl WHERE no_  in (2200100,2200151,2200152) ;");
+           
+           let  E16q = await pool.request().query("SELECT sum(gl.balance)  as 'E16' from gl WHERE no_ in (2410101,2410104,2410106,2410107,2410108,2410111,2410112,2410113,2410114,2410115,2410116,2410117,2410118,2410150,2410300,2410301,2410302,2410303,2410350,2410400,2410402,2410403,2410404,2410405,2410406,2410500,2410501,2410502,2410503,2411102,2411110,2309909 ) ;");
+           
+           let  E23q = await pool.request().query("SELECT sum(gl.balance) +34205 as 'E23' from gl WHERE no_  in (3130000 ) ;");
+           
+
+           let  C01q = await pool.request().query("SELECT sum(gl.balance)  as 'C01' from gl WHERE no_  in (4100400,4101000,4101400,4101700,4101900,4102800,4101300,4101800,4130100,4130200,4130400,4130500,4130600,4130700,4130800,4140100,4140200,4140400,4140500,4141200,4141300,4141400,4141500,4141600,4141700,4141800,4145000) ;");
+
+           let  C02q = await pool.request().query("SELECT sum(gl.balance)  as 'C02' from gl WHERE no_  in (4110900,4110901,4110500,4111000,4110500,4110600,4110800,4110850,4112100,4100900);");
+
+           let  C03q = await pool.request().query("SELECT sum(gl.balance)  as 'C03' from gl WHERE no_  in (4110100) ;");
+
+           let  C07q = await pool.request().query("SELECT sum(gl.balance)  as 'C07' from gl WHERE no_  in (4100400,4101000,4101400,4101700,4101900,4102800,4101300,4101800,4130100,4130200,4130400,4130500,4130600,4130700,4130800,4140100,4140200,4140400,4140500,4141200,4141300,4141400,4141500,4141600,4141700,4141800,4145000,4110100,4110900,4110901,4110500,4111000,4110500,4110600,4110800,4110850,4112100,4100900) ;");
+
+           let  C08q = await pool.request().query("SELECT sum(gl.balance)  as 'C08' from gl WHERE no_  in (4040000,4040001,4040400,7040101,7040200,4040100,4040900);");
+
+           let  C10q = await pool.request().query("SELECT sum(gl.balance)  as 'C10' from gl WHERE no_  in (7050102,7050104,4100107,4040500,4100300) ;");
+
+           let  C11q = await pool.request().query("select (SELECT sum(gl.balance)  as 'C08' from gl WHERE no_  in (4040000,4040001,4040400,7040101,7040200,4040100,4040900))+(SELECT sum(gl.balance)  as 'C10' from gl WHERE no_  in (7050102,7050104,4100107,4040500,4100300)) as 'C11' ;");
+
+           let  C12q = await pool.request().query("SELECT sum(gl.balance)  as 'C12' from gl WHERE no_  in (7050102,7050104,4100107,4040500,4100300,4040000,4040001,4040400,7040101,7040200,4040100,4040900,4110600,4110600,4110900,4110901,4110500,4111000,4110500,4110800,4110850,4112100,4100900,4100400,4101000,4101400,4101700,4101900,4102800,4101300,4101800,4130100,4130200,4130400,4130500,4130600,4130700,4130800,4140100,4140200,4140400,4140500,4141200,4141300,4141400,4141500,4141600,4141700,4141800,4145000,4110100) ;");
+
+           let  C13q = await pool.request().query("SELECT sum(gl.balance)  as 'C13' from gl WHERE no_  in (7030313,7030350,7030124,7030202,7030307,7030308,7030312,7030314,7030315,7030316,7030317,7030400,7031110,7030123,7030301,7030304,7030306,7551804,7030122) ;");
+   
+           let  C14q = await pool.request().query("SELECT sum(gl.balance)  as 'C14' from gl WHERE no_  in (7030200,7030250,7030117,7030500,7030115,7030201,7030501) ;");
+
+           let  C15q = await pool.request().query("SELECT sum(gl.balance)  as 'C15' from gl WHERE no_  in (7030400,7031110,4110601,7030120,7030121,7030118,7030116,7030502,7030503,7030203,7031102) ;");
+
+           let  C17q = await pool.request().query("SELECT sum(gl.balance)  as 'C17' from gl WHERE no_  in (7030313,7030350,7030124,7030202,7030307,7030308,7030312,7030314,7030315,7030316,7030317,7030400,7031110,7030123,7030301,7030304,7030306,7551804,7030122,7030400,7031110,4110601,7030120,7030121,7030118,7030116,7030502,7030503,7030203,7031102,7030200,7030250,7030117,7030500,7030115,7030201,7030501) ;");
+
+           let  C18q = await pool.request().query("SELECT sum(gl.balance)  as 'C18' from gl WHERE no_  in (7040100) ;");
+
+           let  C181q = await pool.request().query("SELECT sum(gl.balance)  as 'C18.1' from gl WHERE no_  in (7032000,7050103) ;");
+
+           let  C23q = await pool.request().query("SELECT sum(gl.balance)  as 'C23' from gl WHERE no_  in (7040100,7032000,7050103) ;");
+
+           let  C24q = await pool.request().query("SELECT sum(gl.balance)  as 'C24' from gl WHERE no_  in ( 7030313,7030350,7030124,7030202,7030307,7030308,7030312,7030314,7030315,7030316,7030317,7030400,7031110,7030123,7030301,7030304,7030306,7551804,7030122,7030400,7031110,4110601,7030120,7030121,7030118,7030116,7030502,7030503,7030203,7031102,7030200,7030250,7030117,7030500,7030115,7030201,7030501,7040100,7032000,7050103) ;");
+
+           let  C25q = await pool.request().query(" Select   (SELECT sum(gl.balance)  as 'C12' from gl WHERE no_  in (7050102,7050104,4100107,4040500,4100300,4040000,4040001,4040400,7040101,7040200,4040100,4040900,4110600,4110600,4110900,4110901,4110500,4111000,4110500,4110800,4110850,4112100,4100900,4100400,4101000,4101400,4101700,4101900,4102800,4101300,4101800,4130100,4130200,4130400,4130500,4130600,4130700,4130800,4140100,4140200,4140400,4140500,4141200,4141300,4141400,4141500,4141600,4141700,4141800,4145000,4110100) )-(SELECT sum(gl.balance)  as 'C24' from gl WHERE no_  in (7030313,7030350,7030124,7030202,7030307,7030308,7030312,7030314,7030315,7030316,7030317,7030400,7031110,7030123,7030301,7030304,7030306,7551804,7030122,7030400,7031110,4110601,7030120,7030121,7030118,7030116,7030502,7030503,7030203,7031102,7030200,7030250,7030117,7030500,7030115,7030201,7030501,7040100,7032000,7050103) ) as 'C25';");
+
+           let  C26q = await pool.request().query("SELECT sum(gl.balance)  as 'C26' from gl WHERE no_  in (7551700) ;");
+
+           let  C28q = await pool.request().query("SELECT sum(gl.balance)  as 'C28' from gl WHERE no_  in (7551700) ;");
+
+           let  C29q = await pool.request().query("Select   ((SELECT sum(gl.balance)  from gl WHERE no_  in (7050102,7050104,4100107,4040500,4100300,4040000,4040001,4040400,7040101,7040200,4040100,4040900,4110600,4110600,4110900,4110901,4110500,4111000,4110500,4110800,4110850,4112100,4100900,4100400,4101000,4101400,4101700,4101900,4102800,4101300,4101800,4130100,4130200,4130400,4130500,4130600,4130700,4130800,4140100,4140200,4140400,4140500,4141200,4141300,4141400,4141500,4141600,4141700,4141800,4145000,4110100) )-(SELECT sum(gl.balance)  from gl WHERE no_  in ( 7030313,7030350,7030124,7030202,7030307,7030308,7030312,7030314,7030315,7030316,7030317,7030400,7031110,7030123,7030301,7030304,7030306,7551804,7030122,7030400,7031110,4110601,7030120,7030121,7030118,7030116,7030502,7030503,7030203,7031102,7030200,7030250,7030117,7030500,7030115,7030201,7030501,7040100,7032000,7050103) )) - (SELECT sum(gl.balance)   from gl WHERE no_  in (7551700) ) as 'C29';");
+
+           let  C36q = await pool.request().query("SELECT sum(gl.balance)  as 'C36' from gl WHERE no_  in (7650300,7650301,7650302,7650303,7650304,7650305,7650306,7650307,7650308,7120100,7120101,7122300,7650201,7120400,7120107,7120500,7122100,7122200,7122504,7121000,7122001,7120200,7120300) ;");
+
+           let  C37q = await pool.request().query("SELECT sum(gl.balance)  as 'C37' from gl WHERE no_  in (7122505,7122506,7170201,7170501,7170502,7170503,7170504,7170505,7170506,7170507,7170508,7170509,7170701,7170900,7170301,7171601,7171701) ;");
+
+           let  C38q = await pool.request().query("SELECT sum(gl.balance)  as 'C38' from gl WHERE no_  in (750606,750621,7553800,7553803,7553804,7550605,7550600,7550607,7550800,7559901,7559902,7559903,7552905,7552903,7552906,7550400,7550401,7550402,7550403,7550404,7550405,7550406,7550407,7552901,7552902,7552904) ;");
+
+           let  C39q = await pool.request().query("SELECT sum(gl.balance)  as 'C39' from gl WHERE no_  in (7551100,7550700,7550701,7550702,7553000,7553001,7553002,7553003,7553004,7550132,7551400,7551401, 751213,7550102,7554700,7550100,7550101,7550102,7550110,7550111,7550112,7550120,75501217550122,7550123,7550124,7550125,7550126,7550127,7550128,7550129,7550130,7550131,7550170,7550171,7550172,7550173,7550174,7550175,7550176,7550177,7550178,7550179,7550134,7551200,7551201,7551202,7551203,7551204,7551205,7551206,7551207,7551208,7551209,7551210,7551211,7551212,7551214,7551215,7551405,7551600,7551300,7551311,755131 ) ;");
+
+           let  C40q = await pool.request().query("SELECT sum(gl.balance)  as 'C40' from gl WHERE no_  in (7300301,7300302,7300600,7300601) ;");
+
+           let  C41q = await pool.request().query("SELECT sum(gl.balance)  as 'C41' from gl WHERE no_  in (7550200,7553808,7552000,7552001,7553802,7650400,7650401,7650402,7650403,7650404,7650405,7650406,7650407,7551101,7551102,7551103,7551104,7551105,7551106,7551108,7650600,7650601,7551702,7553809,7553810,7553811,7553812,7553815,7553816,7553817,7553818,7553819,7550115,7552400,7552401,7552404,7552800,7551706,7551803,7650410 ) ;");
+
+           let  C42q = await pool.request().query("SELECT sum(gl.balance)  as 'C42' from gl WHERE no_  in (7650100,7554600,7554601,7554602,7554603,7554604,7554605,7554606,7552100,7552101,7551800,7551801,7551802,7122400,7122500,7122501,7122502,7122503,7551704,7551902,7551500,7553904,7774501,7554510,7559900,7559904,7559905,7551805,7120700,7551900,7551901,7120900,7551701) ;");
+
+           let  C43q = await pool.request().query("SELECT ((SELECT sum(gl.balance)  as 'C36' from gl WHERE no_  in (7650300,7650301,7650302,7650303,7650304,7650305,7650306,7650307,7650308,7120100,7120101,7122300,7650201,7120400,7120107,7120500,7122100,7122200,7122504,7121000,7122001,7120200,7120300) )+( SELECT sum(gl.balance)  as 'C37' from gl WHERE no_  in (7122505,7122506,7170201,7170501,7170502,7170503,7170504,7170505,7170506,7170507,7170508,7170509,7170701,7170900,7170301,7171601,7171701) )+(SELECT sum(gl.balance)  as 'C38' from gl WHERE no_  in (750606,750621,7553800,7553803,7553804,7550605,7550600,7550607,7550800,7559901,7559902,7559903,7552905,7552903,7552906,7550400,7550401,7550402,7550403,7550404,7550405,7550406,7550407,7552901,7552902,7552904) )+(SELECT sum(gl.balance)  as 'C39' from gl WHERE no_  in ( 7551100,7550700,7550701,7550702,7553000,7553001,7553002,7553003,7553004,7550132,7551400,7551401,751213,7550102,7554700,7550100,7550101,7550102,7550110,7550111,7550112,7550120,75501217550122,7550123,7550124,7550125,7550126,7550127,7550128,7550129,7550130,7550131,7550170,7550171,7550172,7550173,7550174,7550175,7550176,7550177,7550178,7550179,7550134,7551200,7551201,7551202,7551203,7551204,7551205,7551206,7551207,7551208,7551209,7551210,7551211,7551212,7551214,7551215,7551405,7551600,7551300,7551311,755131) )+(SELECT sum(gl.balance)  as 'C40' from gl WHERE no_  in (7300301,7300302,7300600,7300601) )+(SELECT sum(gl.balance)  as 'C41' from gl WHERE no_  in (7550200,7553808,7552000,7552001,7553802,7650400,7650401,7650402,7650403,7650404,7650405,7650406,7650407,7551101,7551102,7551103,7551104,7551105,7551106,7551108,7650600,7650601,7551702,7553809,7553810,7553811,7553812,7553815,7553816,7553817,7553818,7553819,7550115,7552400,7552401,7552404,7552800,7551706,7551803,7650410) )+(SELECT sum(gl.balance)  as 'C42' from gl WHERE no_  in (7650100,7554600,7554601,7554602,7554603,7554604,7554605,7554606,7552100,7552101,7551800,7551801,7551802,7122400,7122500,7122501,7122502,7122503,7551704,7551902,7551500,7553904,7774501,7554510,7559900,7559904,7559905,7551805,7120700,7551900,7551901,7120900,7551701) )) AS 'C43';");
+
+
+           
+
+  
 
            // lastRow not removed 
            let  lastRow = await pool.request().query("select benefit AS 'Lastrow'  from cust where rowno=593075214;");
@@ -186,7 +312,9 @@ app.post("/Employees",function (req, res)  {
           // first_Row not removed
            var first_row =  JSON.stringify(firstRow.recordset).replace(/]|[[]|[}]/g, '');
 
-          // more fields goes here 
+          // more fields goes here
+          
+          //database query fields 
           var DL01 = JSON.stringify(DL01q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
           var DL02 = JSON.stringify(DL02q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
           var DL03 = JSON.stringify(DL03q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
@@ -251,7 +379,123 @@ app.post("/Employees",function (req, res)  {
           var RM36 = JSON.stringify(RM36q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
           var RM37 = JSON.stringify(RM37q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
           var RM38 = JSON.stringify(RM38q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var A01 = JSON.stringify(A01q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var A02 = JSON.stringify(A02q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var A03 = JSON.stringify(A03q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var A04 = JSON.stringify(A04q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var A09 = JSON.stringify(A09q.recordset).replace(/]|[[]|[]|[{]|[}]/g, ''); 
+          var A10 = JSON.stringify(A10q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var A11 = JSON.stringify(A11q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var A12 = JSON.stringify(A12q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var A13 = JSON.stringify(A13q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var A16 = JSON.stringify(A16q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var A26 = JSON.stringify(A26q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var A83 = JSON.stringify(A83q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var A84 = JSON.stringify(A84q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var A91 = JSON.stringify(A91q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var A93 = JSON.stringify(A93q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var T08 = JSON.stringify(T08q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var DL79 = JSON.stringify(DL79q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var DL80 = JSON.stringify(DL80q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var DL82 = JSON.stringify(DL82q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var RL01 = JSON.stringify(RL01q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var RM01 = JSON.stringify(RM01q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var RM02 = JSON.stringify(RM02q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var RM03 = JSON.stringify(RM03q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var RM04 = JSON.stringify(RM04q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var RM07 = JSON.stringify(RM07q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+
+        
+
+          var A92 = JSON.stringify(A92q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var E11 = JSON.stringify(E11q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var E16 = JSON.stringify(E16q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var E23 = JSON.stringify(E23q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var C01 = JSON.stringify(C01q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var C02 = JSON.stringify(C02q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var C03 = JSON.stringify(C03q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var C07 = JSON.stringify(C07q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var C08 = JSON.stringify(C08q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var C10 = JSON.stringify(C10q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var C11 = JSON.stringify(C11q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var C12 = JSON.stringify(C12q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var C13 = JSON.stringify(C13q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var C14 = JSON.stringify(C14q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var C15 = JSON.stringify(C15q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var C17 = JSON.stringify(C17q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var C18 = JSON.stringify(C18q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var C181 = JSON.stringify(C181q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var C23 = JSON.stringify(C23q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var C24 = JSON.stringify(C24q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var C25 = JSON.stringify(C25q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var C26 = JSON.stringify(C26q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var C28 = JSON.stringify(C28q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var C29 = JSON.stringify(C29q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var C36 = JSON.stringify(C36q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var C37 = JSON.stringify(C37q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var C38 = JSON.stringify(C38q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var C39 = JSON.stringify(C39q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var C40 = JSON.stringify(C40q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var C41 = JSON.stringify(C41q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var C42 = JSON.stringify(C42q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+          var C43 = JSON.stringify(C43q.recordset).replace(/]|[[]|[]|[{]|[}]/g, '');
+
+
+
+
+          // manual fields 
+          var Z07 = '"Z07": "Anita Plewes"';
+          var Z08 = '"Z08": "Accounting Supervisor"';
+          var Z09 = '"Z09": ""';
+          var Z10 = `"Z10": "${monthNames[mm]},${dd} ${yy}"`;
+          var Z11 = '"Z11": "Andrew Shannon"';
+          var Z12 = '"Z12": "Manager"';
+          var Z13 = '"Z13": "andrew@oppacu.com"';
+          var Z14 = `"Z14": "${monthNames[mm]},${dd} ${yy}"`;
+          var A36 = '"A36": 0';
+          var A42 = '"A42": 0';
+          var A48 = '"A48": 0';  
+          var A60 = '"A60": 0';
+          var A66 = '"A66": 0';
+          var A72 = '"A72": 0';      
+          var A77 = '"A77": "No"';
+          var T072 = '"T07.2": "Yes"';
+          var T073 = '"T07.3": "Yes"';
+          var L2311 = '"L231.1": "No"';
+          var L2321 = '"L232.1": "No"';
+          var L208 = '"L208": "No"';
+          var L218 = '"L218": "No"';
+          var L213 = '"L213": "No"';
+          var L223 = '"L223": "No"';
+          var L228 = '"L228": "No"';
+          var D11 = '"D11": "No"';
+          var L201 = '"L201": 0';
+          var D12 = '"D12": 0';
+          var D14 = '"D12": 0';
+          var E221 = '"E22.1": 0';
+          var RW052 = '"RW05.2": 0';
+          var NF01 = '"NF01": "No"';
+          var NF02 = '"NF02": "No"';
+          var NF03 = '"NF03": "No"';
+          var NF032 = '"NF03.2": "BDO"';
+          var NF04 = '"NF04": "No"';
+          var NF05 = '"NF05": "No"';
+          var NF06 = '"NF06": "No"';
+          var NF09 = '"NF09": 0';
+          var NF095 = '"NF09.5": 0';
+          var NF10 = '"NF10": "No"';
+          var NF11 = '"NF11": "No"';
+          var K01 = '"K01": "No"';
+          var K02 = '"K02": "No"';
+          var K03 = '"K03": "No"';
+          var K04 = '"K04": "No"';
+          var K05 = '"K05": "No"';
+          var K06 = '"K06": "No"';
+
+
+
           
+
           
       
            // last row never removed 
@@ -264,11 +508,10 @@ app.post("/Employees",function (req, res)  {
            var finalString = first_row;
 
            // more field goes here
-           finalString +=","+DL01+","+DL02+","+DL03+","+DL04+","+DL05+","+DL06+","+DL07+","+DL08+","+DL09+","+DL31+","+DL32+","+DL33+","+DL34+","+DL35+","+DL36+","+DL37+","+DL38+","+DL39+","+E024+","+E025+","+E026+","+RM57+","+RM58+","+RM59+","+RM60+","+RM61+","+RM62+","+RM63+","+RM64+","+RM65+","+RM87+","+RM88+","+RM89+","+RM90+","+RM91+","+RM92+","+RM93+","+RM94+","+RM95+","+RM96+","+RM15+","+RM16+","+RM17+","+RM18+","+RM19+","+RM20+","+RM21+","+RM22+","+RM23+","+RM24+","+RM25+","+RM26+","+RM27+","+RM28+","+RM29+","+RM30+","+RM31+","+RM32+","+RM33+","+RM34+","+RM35+","+RM36+","+RM37+","+RM38;
+           finalString +=","+DL01+","+DL02+","+DL03+","+DL04+","+DL05+","+DL06+","+DL07+","+DL08+","+DL09+","+DL31+","+DL32+","+DL33+","+DL34+","+DL35+","+DL36+","+DL37+","+DL38+","+DL39+","+E024+","+E025+","+E026+","+RM57+","+RM58+","+RM59+","+RM60+","+RM61+","+RM62+","+RM63+","+RM64+","+RM65+","+RM87+","+RM88+","+RM89+","+RM90+","+RM91+","+RM92+","+RM93+","+RM94+","+RM95+","+RM96+","+RM15+","+RM16+","+RM17+","+RM18+","+RM19+","+RM20+","+RM21+","+RM22+","+RM23+","+RM24+","+RM25+","+RM26+","+RM27+","+RM28+","+RM29+","+RM30+","+RM31+","+RM32+","+RM33+","+RM34+","+RM35+","+RM36+","+RM37+","+RM38+","+Z07+","+Z08+","+Z09+","+Z10+","+Z11+","+Z12+","+Z13+","+Z14+","+A01+","+A02+","+A03+","+A04+","+A10+","+A11+","+A12+","+A16+","+A26+","+A83+","+A84+","+A91+","+A93+","+A09+","+A13+","+A36+","+A42+","+A48+","+A60+","+A66+","+A72+","+A77+","+T072+","+T073+","+L2311+","+L2321+","+L208+","+L218+","+L213+","+L223+","+L228+","+D11+","+L201+","+D12+","+E221+","+RW052+","+D14+","+NF01+","+NF02+","+NF03+","+NF032+","+NF04+","+NF05+","+NF06+","+NF09+","+NF095+","+NF10+","+NF11+","+K01+","+K02+","+K03+","+K04+","+K05+","+K06+","+T08+","+DL79+","+DL80+","+DL82+","+RL01+","+RM01+","+RM02+","+RM03+","+RM04+","+RM07  +","+A92+","+E11+","+E16+","+E23+","+C01+","+C02+","+C03+","+C07+","+C08+","+C10+","+C11+","+C12+","+C13+","+C14+","+C15+","+C17+","+C18+","+C181+","+C23+","+C24+","+C25+","+C26+","+C28+","+C29+","+C36+","+C37+","+C38+","+C39;+","+C40;+","+C41;+","+C42;+","+C43;
            
 
-
-
+         
            // last-row never removed 
            finalString +=","+last_row;
 
