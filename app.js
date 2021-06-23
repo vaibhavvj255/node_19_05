@@ -27,7 +27,7 @@ app.get("/add", (req,res) => {
 //----- post app-------
 app.post("/fileCreated",function (req, res)  {
 
-  fs.writeFile("jjs.json", "Hey there!", function(err) {
+  fs.writeFile("jsss.json", "Hey there!", function(err) {
     if(err) {
         return console.log(err);
     }
@@ -35,13 +35,6 @@ app.post("/fileCreated",function (req, res)  {
 }); 
 
 
-
-
-  sql.connect(config, function (err) {
-
-    if (err) console.log(err);
-   else console.log('wallah');
-    });
       
          // var to store file name 
          var d = new Date();
