@@ -27,14 +27,19 @@ app.get("/add", (req,res) => {
 //----- post app-------
 app.post("/fileCreated",function (req, res)  {
 
-  fs.writeFile("jsss.json", "Hey there!", function(err) {
+  fs.writeFile("./json_files/jsosss.text", "Hey there!", function(err) {
     if(err) {
         return console.log(err);
     }
     console.log("The file was saved!");
 }); 
 
-
+ fs.writeFile("https://github.com/vaibhavvj255/oppa-fsra/json_files/ndkfndkf.js", "Hey there!", function(err) {
+    if(err) {
+        return console.log(err);
+    }
+    console.log("The file was saved!");
+}); 
       
          // var to store file name 
          var d = new Date();
