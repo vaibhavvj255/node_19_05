@@ -30,7 +30,10 @@ app.post("/fileCreated",function (req, res)  {
   const myWriteFunction = async (filename) => {
   await fs.writeFile(filename.js, 'Hello World')
 }
-      
+    
+   const myWriteFunction = async (filename) => {
+  await fs.writeFile(${__dirname}/filename.json, 'Hello World')
+}
          // var to store file name 
          var d = new Date();
          var dd = d.getDate();
