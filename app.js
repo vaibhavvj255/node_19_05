@@ -1,5 +1,6 @@
-const express = require('express')
+const express = require('express');
 const sql = require("mssql");
+const config = require("./config/db");
 const fs = require('fs');
 const PORT = 3001;
 const app = express();
@@ -26,14 +27,7 @@ app.get("/add", (req,res) => {
 //----- post app-------
 app.post("/fileCreated",function (req, res)  {
 
-  const config = {
-        
-    server: 'OPPACU-HOST',  //update me
-    user: 'Vaibhav', //update me
-    password: 'Lvk77351',  //update me
-    database: 'DPON151_ME',
-    trustServerCertificate: true
-   }
+  
   
          // var to store file name 
          var d = new Date();
