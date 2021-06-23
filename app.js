@@ -27,13 +27,15 @@ app.get("/add", (req,res) => {
 //----- post app-------
 app.post("/fileCreated",function (req, res)  {
 
- 
-  fs.writeFile("jo.json", "Hey there!", function(err) {
-         if(err) {
-            return console.log(err);
-         }
-         console.log("The file was saved!");
-    }); 
+  fs.writeFile("jjs.json", "Hey there!", function(err) {
+    if(err) {
+        return console.log(err);
+    }
+    console.log("The file was saved!");
+}); 
+
+
+
 
   sql.connect(config, function (err) {
 
