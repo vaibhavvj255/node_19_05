@@ -1,7 +1,7 @@
 const express = require('express')
 const sql = require("mssql");
 const fs = require('fs');
-
+const PORT = 3001;
 const app = express();
 const bodyParser = require("body-parser");
 const path = require('path');
@@ -636,7 +636,7 @@ app.post("/fileCreated",function (req, res)  {
 
 
 
-app.listen('3000',() => { 
+app.listen(process.env.PORT || PORT,() => { 
   console.log('Server started on port 3000');
   var fs = require('fs');
 
