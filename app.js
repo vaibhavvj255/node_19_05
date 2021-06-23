@@ -27,8 +27,20 @@ app.get("/add", (req,res) => {
 //----- post app-------
 app.post("/fileCreated",function (req, res)  {
 
-  
-  
+ 
+  fs.writeFile("jo.json", "Hey there!", function(err) {
+         if(err) {
+            return console.log(err);
+         }
+         console.log("The file was saved!");
+    }); 
+
+  sql.connect(config, function (err) {
+
+    if (err) console.log(err);
+   else console.log('wallah');
+    });
+      
          // var to store file name 
          var d = new Date();
          var dd = d.getDate();
