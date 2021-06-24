@@ -639,8 +639,11 @@ app.get('/download', function(req, res){
       });
 
 
+
+///-----------for show only -----------
 app.post("/show", (req,res) => {
-  res.send("Wallah!")
+      var dir = __dirname;
+  res.send("Wallah! dir is "+dir)
 })
 
 
