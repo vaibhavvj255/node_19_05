@@ -633,9 +633,8 @@ app.post("/fileCreated",function (req, res)  {
 
 app.get('/download', function(req, res){
 
-  res.send("wasdk");
-        // const file = `${__dirname}/json_files/${fileName}.json`;
-        // res.download(file); // Set disposition and send it.
+        
+        res.download(path.join(__dirname, './json_files', 'v.json')); // Set disposition and send it.
       });
 
 
