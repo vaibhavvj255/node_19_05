@@ -38,9 +38,6 @@ app.get("/add", (req,res) => {
 app.post("/fileCreated",function (req, res)  {
 
 
-      
-        
-        
         //--------------------- async method----------------------
   
         (async function () {
@@ -636,11 +633,15 @@ app.post("/fileCreated",function (req, res)  {
       });
   
 
-      app.get('/download', function(req, res){
+app.get('/download', function(req, res){
         const file = `${__dirname}/json_files/${fileName}.json`;
         res.download(file); // Set disposition and send it.
       });
 
+
+app.post("/show", (req,res) => {
+  res.send("Wallah!")
+})
 
 
 app.listen(process.env.PORT || PORT,() => { 
