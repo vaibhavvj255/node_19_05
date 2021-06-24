@@ -623,7 +623,7 @@ app.post("/fileCreated",function (req, res)  {
       })
    
     
-         res.sendFile(path.join('/fileCreated.html'));
+         res.sendFile('./fileCreated.html');
 
           
         //  res.send("<html lang='en'> <head>  <meta charset='UTF-8'>  <meta http-equiv='X-UA-Compatible' content='IE=edge'> <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm' crossorigin='anonymous'> <title>Document</title></head> <body>  <nav class='navbar navbar-dark bg-dark'>   <a class='navbar-brand' href='#'>OPPA Credit Union FSRA Data </a> </nav><div class='container'> <div class='row mx-auto mt-5'>   <h2 class='text-success'> Your file is created and saved as "+fileName+".json</h2>  </div> </div></body>    </html>");
