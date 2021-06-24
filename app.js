@@ -642,6 +642,7 @@ app.get('/download', function(req, res){
 
 ///-----------for show only -----------
 app.post("/show", (req,res) => {
+ var dir =  path.join(__dirname + '/fileCreated.html');
       var dir = __dirname;
   res.send("Wallah! dir is "+dir)
 })
