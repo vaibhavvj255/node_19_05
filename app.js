@@ -37,30 +37,9 @@ app.get("/add", (req,res) => {
 //----- post app-------
 app.post("/fileCreated",function (req, res)  {
 
-<<<<<<< HEAD
 
       
         
-=======
-  const myWriteFunction = async (filename) => {
-  await fs.writeFile(filename.js, 'Hello World')
-}
-  
-  fs.writeFile('${__dirname}/confihhg.json', "hvjv hbhj  hvhjhjv bjhj jh",(err) => {
-     if(err) console.log(err);
-});
-    
-  
-         // var to store file name 
-         var d = new Date();
-         var dd = d.getDate();
-         var mm = d.getMonth();
-         var yy = d.getFullYear();
-         var monthNames = ["January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
-  ];
-        var fileName = "db_"+d.getDate()+"_"+d.getMonth()+"_"+d.getTime();
->>>>>>> 25331742fe8efbe95b59dc131be7130930474138
         
         //--------------------- async method----------------------
   
