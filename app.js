@@ -2,7 +2,7 @@ const express = require('express');
 const sql = require("mssql");
 const config = require("./config/db");
 const fs = require('fs');
-const PORT = 3001;
+const PORT = 3000;
 const app = express();
 const bodyParser = require("body-parser");
 const path = require('path');
@@ -10,6 +10,16 @@ const { json } = require('express');
 
 app.use(bodyParser.urlencoded({extended: false}));
 
+ // var to store file name 
+         var d = new Date();
+         var dd = d.getDate();
+         var mm = d.getMonth();
+         var yy = d.getFullYear();
+         var monthNames = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+        const uniqueN = 490649;
+        const fileName = "db_"+d.getDate()+uniqueN;
 
 
 //-------get app------
@@ -27,24 +37,9 @@ app.get("/add", (req,res) => {
 //----- post app-------
 app.post("/fileCreated",function (req, res)  {
 
-  fs.writeFile("jsss.json", "Hey there!", function(err) {
-    if(err) {
-        return console.log(err);
-    }
-    console.log("The file was saved!");
-}); 
-
 
       
-         // var to store file name 
-         var d = new Date();
-         var dd = d.getDate();
-         var mm = d.getMonth();
-         var yy = d.getFullYear();
-         var monthNames = ["January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
-  ];
-        var fileName = "db_"+d.getDate()+"_"+d.getMonth()+"_"+d.getTime();
+        
         
         //--------------------- async method----------------------
   
@@ -617,6 +612,7 @@ app.post("/fileCreated",function (req, res)  {
   //---------Creating the JSON file and exporting to the folder named json_files-----
           fs.writeFile(`json_files/${fileName}.json`, jsonData, err => err && console.log(err));
           
+  
           //catching the errors
         } catch (err) {
              console.log(err);
@@ -629,11 +625,21 @@ app.post("/fileCreated",function (req, res)  {
           console.log(err);
       })
    
-  
-         res.send("<html lang='en'> <head>  <meta charset='UTF-8'>  <meta http-equiv='X-UA-Compatible' content='IE=edge'> <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm' crossorigin='anonymous'> <title>Document</title></head> <body>  <nav class='navbar navbar-dark bg-dark'>   <a class='navbar-brand' href='#'>OPPA Credit Union FSRA Data </a> </nav><div class='container'> <div class='row mx-auto mt-5'>   <h2 class='text-success'> Your file is created and saved as "+fileName+".json</h2>  </div> </div></body>    </html>");
+    
+          res.sendFile(path.join(__dirname + '/fileCreated.html'));
 
+
+          
+        //  res.send("<html lang='en'> <head>  <meta charset='UTF-8'>  <meta http-equiv='X-UA-Compatible' content='IE=edge'> <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm' crossorigin='anonymous'> <title>Document</title></head> <body>  <nav class='navbar navbar-dark bg-dark'>   <a class='navbar-brand' href='#'>OPPA Credit Union FSRA Data </a> </nav><div class='container'> <div class='row mx-auto mt-5'>   <h2 class='text-success'> Your file is created and saved as "+fileName+".json</h2>  </div> </div></body>    </html>");
+
+        
       });
   
+
+      app.get('/download', function(req, res){
+        const file = `${__dirname}/json_files/${fileName}.json`;
+        res.download(file); // Set disposition and send it.
+      });
 
 
 
