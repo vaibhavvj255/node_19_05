@@ -630,7 +630,7 @@ app.post("/fileCreated",function (req, res)  {
         
       });
   
-  // for server
+  // for live server
 app.get('/download', function(req, res){
         res.download(path.join(__dirname, './json_files', 'FSRA_may2021.json')); // Set disposition and send it.
       });
@@ -641,6 +641,7 @@ app.get('/download', function(req, res){
   });*/
 
 
+  
 ///-----------for show only -----------
 app.post("/show", (req,res) => {
  var dir =  path.join(__dirname + '/fileCreated.html');
