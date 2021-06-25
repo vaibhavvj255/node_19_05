@@ -623,7 +623,7 @@ app.post("/fileCreated",function (req, res)  {
       })
    
     
-      res.download(path.join(__dirname, './json_files', 'FSRA_may2021.json'));
+      res.download(path.join(__dirname, './json_files', fileName.json));
    //   res.sendFile(path.join(__dirname, './public', 'filecreated.html'));
           
         //  res.send("<html lang='en'> <head>  <meta charset='UTF-8'>  <meta http-equiv='X-UA-Compatible' content='IE=edge'> <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm' crossorigin='anonymous'> <title>Document</title></head> <body>  <nav class='navbar navbar-dark bg-dark'>   <a class='navbar-brand' href='#'>OPPA Credit Union FSRA Data </a> </nav><div class='container'> <div class='row mx-auto mt-5'>   <h2 class='text-success'> Your file is created and saved as "+fileName+".json</h2>  </div> </div></body>    </html>");
